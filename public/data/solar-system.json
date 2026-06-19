@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "title": "Simuliertes Sonnensystem",
+    "language": "de",
+    "last_reviewed": "2026-06-18",
+    "note_de": "MVP-Daten für didaktische Visualisierung. Exakte Ephemeriden und Bahnneigungen sind nicht enthalten. Werte sind gerundet."
+  },
+  "sun": {
+    "id": "sun",
+    "name_de": "Sonne",
+    "name_en": "Sun",
+    "type_de": "Stern",
+    "radius_km": 695700,
+    "diameter_km": 1391400,
+    "mean_distance_million_km": null,
+    "semi_major_axis_au": null,
+    "orbital_period_days": null,
+    "rotation_period_hours": 609.12,
+    "axial_tilt_deg": 7.25,
+    "color": "#ffd166",
+    "short_description_de": "Die Sonne ist der Stern im Zentrum unseres Sonnensystems und enthält den mit Abstand größten Teil der Gesamtmasse.",
+    "facts_de": [
+      "Licht benötigt von der Sonne zur Erde etwa 8 Minuten und 20 Sekunden.",
+      "Die Sonne ist die Energiequelle für Klima, Wetter und Leben auf der Erde."
+    ]
+  },
+  "planets": [
+    {
+      "id": "mercury",
+      "name_de": "Merkur",
+      "name_en": "Mercury",
+      "type_de": "Gesteinsplanet",
+      "radius_km": 2439.7,
+      "diameter_km": 4879.4,
+      "mean_distance_million_km": 57.9,
+      "semi_major_axis_au": 0.387,
+      "orbital_period_days": 88.0,
+      "rotation_period_hours": 1407.6,
+      "axial_tilt_deg": 0.03,
+      "color": "#9ca3af",
+      "short_description_de": "Merkur ist der sonnennächste und kleinste Planet des Sonnensystems.",
+      "facts_de": [
+        "Sehr große Temperaturschwankungen.",
+        "Besitzt keine dichte Atmosphäre."
+      ]
+    },
+    {
+      "id": "venus",
+      "name_de": "Venus",
+      "name_en": "Venus",
+      "type_de": "Gesteinsplanet",
+      "radius_km": 6051.8,
+      "diameter_km": 12103.6,
+      "mean_distance_million_km": 108.2,
+      "semi_major_axis_au": 0.723,
+      "orbital_period_days": 224.7,
+      "rotation_period_hours": -5832.5,
+      "axial_tilt_deg": 177.4,
+      "color": "#f4c27a",
+      "short_description_de": "Venus ist etwa erdgroß, besitzt aber eine extrem dichte Atmosphäre und sehr hohe Oberflächentemperaturen.",
+      "facts_de": [
+        "Rotiert retrograd.",
+        "Dichter Treibhauseffekt."
+      ]
+    },
+    {
+      "id": "earth",
+      "name_de": "Erde",
+      "name_en": "Earth",
+      "type_de": "Gesteinsplanet",
+      "radius_km": 6371.0,
+      "diameter_km": 12742.0,
+      "mean_distance_million_km": 149.6,
+      "semi_major_axis_au": 1.0,
+      "orbital_period_days": 365.256,
+      "rotation_period_hours": 23.934,
+      "axial_tilt_deg": 23.44,
+      "color": "#3b82f6",
+      "short_description_de": "Die Erde ist unser Heimatplanet und der einzige bekannte Planet mit dauerhaftem flüssigem Wasser an der Oberfläche und Leben.",
+      "facts_de": [
+        "Besitzt einen großen natürlichen Mond.",
+        "Atmosphäre mit Stickstoff und Sauerstoff."
+      ]
+    },
+    {
+      "id": "mars",
+      "name_de": "Mars",
+      "name_en": "Mars",
+      "type_de": "Gesteinsplanet",
+      "radius_km": 3389.5,
+      "diameter_km": 6779.0,
+      "mean_distance_million_km": 227.9,
+      "semi_major_axis_au": 1.524,
+      "orbital_period_days": 686.98,
+      "rotation_period_hours": 24.623,
+      "axial_tilt_deg": 25.19,
+      "color": "#c2410c",
+      "short_description_de": "Mars ist der rote Planet und ein zentrales Ziel der planetaren Forschung.",
+      "facts_de": [
+        "Besitzt die Monde Phobos und Deimos.",
+        "Spuren früherer Wasseraktivität sind nachgewiesen."
+      ]
+    },
+    {
+      "id": "jupiter",
+      "name_de": "Jupiter",
+      "name_en": "Jupiter",
+      "type_de": "Gasriese",
+      "radius_km": 69911,
+      "diameter_km": 139822,
+      "mean_distance_million_km": 778.6,
+      "semi_major_axis_au": 5.203,
+      "orbital_period_days": 4332.59,
+      "rotation_period_hours": 9.925,
+      "axial_tilt_deg": 3.13,
+      "color": "#d8b384",
+      "short_description_de": "Jupiter ist der größte Planet des Sonnensystems und ein massereicher Gasriese.",
+      "facts_de": [
+        "Bekannt für den Großen Roten Fleck.",
+        "Besitzt zahlreiche Monde."
+      ]
+    },
+    {
+      "id": "saturn",
+      "name_de": "Saturn",
+      "name_en": "Saturn",
+      "type_de": "Gasriese",
+      "radius_km": 58232,
+      "diameter_km": 116464,
+      "mean_distance_million_km": 1433.5,
+      "semi_major_axis_au": 9.537,
+      "orbital_period_days": 10759.22,
+      "rotation_period_hours": 10.656,
+      "axial_tilt_deg": 26.73,
+      "color": "#e5d19b",
+      "short_description_de": "Saturn ist besonders durch sein ausgeprägtes Ringsystem bekannt.",
+      "facts_de": [
+        "Zweitgrößter Planet des Sonnensystems.",
+        "Der Mond Titan besitzt eine dichte Atmosphäre."
+      ]
+    },
+    {
+      "id": "uranus",
+      "name_de": "Uranus",
+      "name_en": "Uranus",
+      "type_de": "Eisriese",
+      "radius_km": 25362,
+      "diameter_km": 50724,
+      "mean_distance_million_km": 2872.5,
+      "semi_major_axis_au": 19.191,
+      "orbital_period_days": 30688.5,
+      "rotation_period_hours": -17.24,
+      "axial_tilt_deg": 97.77,
+      "color": "#93c5fd",
+      "short_description_de": "Uranus ist ein Eisriese mit ungewöhnlich stark geneigter Rotationsachse.",
+      "facts_de": [
+        "Rotiert praktisch auf der Seite.",
+        "Hat ein schwaches Ringsystem."
+      ]
+    },
+    {
+      "id": "neptune",
+      "name_de": "Neptun",
+      "name_en": "Neptune",
+      "type_de": "Eisriese",
+      "radius_km": 24622,
+      "diameter_km": 49244,
+      "mean_distance_million_km": 4495.1,
+      "semi_major_axis_au": 30.07,
+      "orbital_period_days": 60182,
+      "rotation_period_hours": 16.11,
+      "axial_tilt_deg": 28.32,
+      "color": "#2563eb",
+      "short_description_de": "Neptun ist der äußerste der acht anerkannten Planeten und ein windreicher Eisriese.",
+      "facts_de": [
+        "Sehr starke atmosphärische Winde.",
+        "Sein größter Mond heißt Triton."
+      ]
+    }
+  ]
+}

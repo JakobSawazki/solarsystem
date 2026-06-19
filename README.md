@@ -1,0 +1,67 @@
+# Simuliertes Sonnensystem – interaktive GitHub-Pages-Homepage
+
+Dieses Repository ist als Codex-Startpaket für eine hochwertige, interaktive Web-App gedacht: eine 3D-Homepage über unser Sonnensystem mit Sonne, Planeten, maßstabsbezogenen Ansichten, Infokarten, Animationen, Zoom/Drehung und GitHub-Pages-Veröffentlichung.
+
+## Zielbild
+
+Die fertige Anwendung soll wie eine moderne wissenschaftlich-edukative Web-Erfahrung wirken:
+
+- 3D-Ansicht mit Sonne und acht Planeten.
+- Drehen, Zoomen, Schwenken per Maus/Touch.
+- Infopanel pro Himmelskörper mit Daten und verständlicher Erklärung.
+- Umschaltbare Darstellungsmodi:
+  - **Cinematic Mode**: optisch schön, für Startansicht und Präsentation.
+  - **Größenmaßstab**: Radien relativ korrekt, Entfernungen bewusst komprimiert.
+  - **Entfernungsmaßstab**: Umlaufbahnen relativ korrekt, Planetengrößen sichtbar über Mindestgröße/Marker.
+  - **Vergleichsmodus**: Größenvergleich nebeneinander oder als „Line-up“.
+- Coole, aber performante Effekte: Sternfeld, dezentes Sonnen-Glow, Orbitlinien, Labels, sanfte Kameraübergänge.
+- Veröffentlichung über GitHub Pages.
+
+## Warum mehrere Maßstäbe nötig sind
+
+Ein vollständig echter Maßstab für Größen und Entfernungen gleichzeitig ist im Browser didaktisch problematisch: Die Sonne wäre im Verhältnis zur Erde sehr groß, die Abstände zwischen den Planeten wären extrem weit, und die kleinen Planeten wären kaum sichtbar. Deshalb soll die App transparent mit **mehreren Maßstabsmodi** arbeiten und im UI klar erklären, welcher Modus aktiv ist.
+
+## Technische Basis
+
+Empfohlener Stack:
+
+- Vite als schneller Static-Site-Build.
+- Three.js für die 3D-Szene.
+- GitHub Pages für Veröffentlichung.
+- Datengetriebene Planetenkonfiguration in `public/data/solar-system.json`.
+
+## Lokaler Start
+
+```bash
+npm install
+npm run dev
+```
+
+Dann die lokale Vite-Adresse öffnen.
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## GitHub Pages
+
+Das Repository enthält bereits einen Workflow unter `.github/workflows/deploy.yml`. In GitHub muss unter:
+
+`Settings` → `Pages` → `Build and deployment` → `Source` → `GitHub Actions`
+
+ausgewählt werden.
+
+## Einstieg für Codex
+
+Codex soll zuerst diese Dateien lesen:
+
+1. `AGENTS.md`
+2. `SKILL.md`
+3. `TASKS.md`
+4. `docs/PROJECT_SPEC.md`
+5. `docs/DATA_MODEL.md`
+
+Ein sehr kurzer Codex-Startprompt befindet sich in `CODEX_PROMPT_SHORT.md`.

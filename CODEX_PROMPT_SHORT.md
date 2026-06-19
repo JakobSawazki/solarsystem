@@ -1,0 +1,1 @@
+Lies `AGENTS.md`, `SKILL.md` und `TASKS.md`. Bearbeite nur die erste `OPEN`-Task. Ziel ist eine interaktive GitHub-Pages-Web-App „Simuliertes Sonnensystem“ mit Vite + Three.js, dreh-/zoombarer 3D-Ansicht, Planeteninfos, mehreren Maßstabsmodi und GitHub-Pages-Deployment. Aktualisiere nach der Umsetzung `TASKS.md`, `docs/VERSION_STATE.md` und `docs/CHANGELOG.md`.

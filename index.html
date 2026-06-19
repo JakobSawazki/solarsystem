@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Interaktive 3D-Homepage über unser simuliertes Sonnensystem mit Größen- und Entfernungsvergleich." />
+    <title>Simuliertes Sonnensystem</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <noscript>Diese interaktive Sonnensystem-Ansicht benötigt JavaScript.</noscript>
+    <div id="app">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Interaktive 3D-Homepage</p>
+          <h1>Simuliertes Sonnensystem</h1>
+          <p class="subtitle">Drehen, zoomen, vergleichen und die Planeten unseres Sonnensystems erkunden.</p>
+        </div>
+        <div class="toolbar" aria-label="Ansichtssteuerung">
+          <label>
+            Maßstab
+            <select id="scaleMode">
+              <option value="cinematic">Cinematic</option>
+              <option value="size">Größenmaßstab</option>
+              <option value="distance">Entfernungsmaßstab</option>
+              <option value="compare">Vergleich</option>
+            </select>
+          </label>
+          <button id="resetView" type="button">Ansicht zurücksetzen</button>
+        </div>
+      </header>
+
+      <main class="stage-wrap">
+        <section id="sceneContainer" class="scene-container" aria-label="3D-Ansicht des Sonnensystems"></section>
+        <section class="object-dock" aria-label="Navigation durch das Sonnensystem">
+          <div class="dock-heading">
+            <div>
+              <p class="panel-kicker">Direkt auswählen</p>
+              <h2>Himmelskörper</h2>
+            </div>
+            <span class="interaction-hint" aria-hidden="true">Klick · Ziehen · Zoomen</span>
+          </div>
+          <div id="objectButtons" class="object-buttons" aria-label="Himmelskörper auswählen"></div>
+          <p id="scaleHint" class="scale-hint">Cinematic: Größen und Abstände sind visuell optimiert.</p>
+        </section>
+
+        <aside id="infoPanel" class="info-panel" aria-live="polite" aria-labelledby="objectName">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Auswahl</p>
+              <h2 id="objectName" tabindex="-1">Sonnensystem</h2>
+            </div>
+            <button id="closeInfo" class="icon-button" type="button" aria-label="Infopanel schließen">×</button>
+          </div>
+          <p id="objectDescription">Wähle einen Himmelskörper, um seine Daten anzuzeigen.</p>
+          <dl id="objectFacts" class="facts"></dl>
+          <section id="highlightSection" class="highlights" aria-labelledby="highlightTitle">
+            <h3 id="highlightTitle">Besonderheiten</h3>
+            <ul id="objectHighlights"></ul>
+          </section>
+        </aside>
+
+        <section id="fileProtocolNotice" class="file-protocol-notice" role="status" hidden>
+          <p class="panel-kicker">Fast startklar</p>
+          <h2>Bitte über den lokalen Webserver öffnen</h2>
+          <p>
+            Diese Vite-/Three.js-App kann beim direkten Öffnen der <code>index.html</code>
+            keine 3D-Module laden. Starte sie im Projektordner mit:
+          </p>
+          <div class="command-steps" aria-label="Startbefehle">
+            <code>npm install</code>
+            <code>npm run dev</code>
+          </div>
+          <p class="file-protocol-note">Öffne danach die angezeigte Adresse, normalerweise <strong>http://localhost:5173</strong>.</p>
+        </section>
+      </main>
+    </div>
+    <script>
+      if (window.location.protocol === 'file:') {
+        document.documentElement.classList.add('file-mode')
+        document.querySelector('#fileProtocolNotice').hidden = false
+      }
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

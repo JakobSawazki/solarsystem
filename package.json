@@ -1,0 +1,18 @@
+{
+  "name": "simuliertes-sonnensystem",
+  "version": "0.0.0-startpack",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node scripts/validate-data.mjs && node scripts/validate-scaling.mjs && node scripts/validate-rendering.mjs && node scripts/validate-interaction.mjs"
+  },
+  "dependencies": {
+    "three": "latest"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
