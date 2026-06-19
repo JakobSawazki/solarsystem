@@ -279,3 +279,15 @@ Arbeitsregel für Codex: Immer nur die erste Task mit Status `OPEN` bearbeiten. 
 **Priorität:** Niedrig/Mittel
 
 **Idee:** Optionale echte Planetentexturen einbinden, aber nur mit sauber dokumentierten Lizenzen/Quellen.
+
+---
+
+### TASK-015 – Echte Planetenkonstellation und Datumseingabe
+
+**Status:** DONE  
+**Abgeschlossen:** 2026-06-19 – `src/ephemeris.js` berechnet aus Keplerschen Bahnelementen (JPL/Standish) die heliozentrische Länge jedes Planeten. Die Planeten stehen am realen Bahnwinkel für ein wählbares Datum (Datumsfeld + „Heute"), die Zeitsteuerung läuft in Tagen pro Sekunde, Start pausiert auf heute. Eigener Ephemeriden-Test ergänzt.  
+**Priorität:** Mittel
+
+**Idee:** Reale Stellung der Planeten zu einem Datum zeigen und durchspielbar machen.
+
+**Hinweis:** Genauigkeit ca. 1800–2050; Bahnneigungen werden für die Ansicht in die Ekliptik projiziert. Mögliche Erweiterung: echte 3D-Neigung und elliptische Radien.

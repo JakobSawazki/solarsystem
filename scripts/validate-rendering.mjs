@@ -71,9 +71,14 @@ SCALE_MODE_IDS.forEach((modeId) => {
 })
 
 solarSystem.rebuild('cinematic')
+solarSystem.setDate(new Date('2026-06-19T00:00:00Z'))
 const earthBefore = solarSystem.bodies.get('earth').group.position.clone()
+solarSystem.setDate(new Date('2026-09-19T00:00:00Z'))
+assert(earthBefore.distanceTo(solarSystem.bodies.get('earth').group.position) > 0, 'Planetenpositionen ändern sich nicht mit dem Datum')
+
+const marsRotationBefore = solarSystem.bodies.get('mars').mesh.rotation.y
 solarSystem.update(5)
-assert(earthBefore.distanceTo(solarSystem.bodies.get('earth').group.position) > 0, 'Planetenpositionen werden nicht aktualisiert')
+assert(solarSystem.bodies.get('mars').mesh.rotation.y !== marsRotationBefore, 'Eigenrotation wird durch update nicht aktualisiert')
 
 solarSystem.dispose()
 assert(solarSystem.root.parent === null, 'Sonnensystem wird nicht sauber aus der Szene entfernt')

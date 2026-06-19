@@ -17,7 +17,8 @@ Die fertige Anwendung soll wie eine moderne wissenschaftlich-edukative Web-Erfah
   - **Entfernungsmaßstab**: Umlaufbahnen relativ korrekt, Planetengrößen sichtbar über Mindestgröße/Marker.
   - **Vergleichsmodus**: Größenvergleich nebeneinander oder als „Line-up“.
 - Coole, aber performante Effekte: echte Planetentexturen, Bloom, Atmosphären-Glow, Sternfeld, Orbitlinien, sanfte Kameraübergänge.
-- Zeitsteuerung (Pause, 1×, 10×, 100×) für die Umlaufbewegung.
+- Echte Planetenkonstellation für ein wählbares Datum (Datumsfeld + „Heute") auf Basis Keplerscher Bahnelemente.
+- Zeitsteuerung in Tagen pro Sekunde (Pause, 1, 7, 30 T/s).
 - Veröffentlichung über GitHub Pages.
 
 Texturen werden mit dokumentierter Lizenz eingebunden, siehe `public/textures/TEXTURE_CREDITS.md`.

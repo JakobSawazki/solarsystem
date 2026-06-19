@@ -11,6 +11,8 @@ const container = document.querySelector('#sceneContainer')
 const scaleModeSelect = document.querySelector('#scaleMode')
 const resetViewButton = document.querySelector('#resetView')
 const timeControl = document.querySelector('#timeControl')
+const dateInput = document.querySelector('#dateInput')
+const todayButton = document.querySelector('#todayButton')
 
 const sceneRuntime = createSceneRuntime(container)
 const scene = sceneRuntime?.scene
@@ -26,9 +28,11 @@ const reducedMotion = typeof window.matchMedia === 'function'
 
 let solarSystem = null
 let scaleMode = 'cinematic'
-let simTime = 0
+let simMillis = Date.now()
+let speed = 0 // Tage pro Sekunde (0 = pausiert)
+let spinTime = 0
 let lastFrame = performance.now()
-let timeSpeed = reducedMotion ? 0 : 1
+let lastShownDay = ''
 let pointerStart = null
 
 const ui = createSolarSystemUi({
@@ -68,22 +72,53 @@ function applyScaleMode(modeId, { rebuild = true } = {}) {
   ui.clearSelection()
 }
 
-function setTimeSpeed(speed) {
-  timeSpeed = speed
+function formatDateInput(date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+function syncDateInput(force = false) {
+  const shown = formatDateInput(new Date(simMillis))
+  if (force || shown !== lastShownDay) {
+    lastShownDay = shown
+    if (dateInput) dateInput.value = shown
+  }
+}
+
+function setSimDate(date, { updateInput = true } = {}) {
+  simMillis = date.getTime()
+  solarSystem?.setDate(new Date(simMillis))
+  if (updateInput) syncDateInput(true)
+}
+
+function setTimeSpeed(value) {
+  speed = value
   if (!timeControl) return
   timeControl.querySelectorAll('button').forEach((button) => {
-    button.setAttribute('aria-pressed', String(Number(button.dataset.speed) === speed))
+    button.setAttribute('aria-pressed', String(Number(button.dataset.speed) === value))
   })
 }
 
-function configureTimeControl() {
-  if (!timeControl) return
-  timeControl.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-speed]')
-    if (!button) return
-    setTimeSpeed(Number(button.dataset.speed))
-  })
-  setTimeSpeed(timeSpeed)
+function configureTimeControls() {
+  if (timeControl) {
+    timeControl.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-speed]')
+      if (button) setTimeSpeed(Number(button.dataset.speed))
+    })
+  }
+  if (dateInput) {
+    dateInput.addEventListener('change', () => {
+      const parsed = new Date(`${dateInput.value}T12:00:00`)
+      if (!Number.isNaN(parsed.getTime())) setSimDate(parsed, { updateInput: false })
+    })
+  }
+  if (todayButton) {
+    todayButton.addEventListener('click', () => setSimDate(new Date()))
+  }
+  setTimeSpeed(speed)
+  syncDateInput(true)
 }
 
 function createStarTexture() {
@@ -184,9 +219,15 @@ function onPointerUp(event) {
 function animate(now) {
   const delta = Math.min((now - lastFrame) / 1000, 0.1)
   lastFrame = now
-  simTime += delta * timeSpeed
 
-  solarSystem?.update(simTime)
+  if (!reducedMotion) spinTime += delta
+  if (speed !== 0) {
+    simMillis += delta * speed * 86400000
+    solarSystem?.setDate(new Date(simMillis))
+    syncDateInput()
+  }
+
+  solarSystem?.update(spinTime)
   sceneRuntime.updateCameraTransition(now)
   controls.update()
   sceneRuntime.render()
@@ -195,7 +236,6 @@ function animate(now) {
 
 async function init() {
   configureScaleModeSelect()
-  configureTimeControl()
   createStarField()
 
   const [solarData, assets] = await Promise.all([
@@ -208,11 +248,13 @@ async function init() {
     sunLight,
     data: solarData,
     mode: scaleMode,
-    assets
+    assets,
+    date: new Date(simMillis)
   })
 
   ui.setBodies([solarData.sun, ...solarData.planets])
   applyScaleMode(scaleMode, { rebuild: false })
+  configureTimeControls()
   selectBody('sun', { moveCamera: false })
 
   renderer.domElement.addEventListener('pointerdown', onPointerDown)

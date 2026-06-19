@@ -18,6 +18,7 @@ echte Planetentexturen, Bloom/Atmosphären-Effekte und eine Zeitsteuerung.
 - `src/scene.js` – Renderer, Kamera, OrbitControls, Licht, Tone-Mapping, **Bloom-Postprocessing** (`EffectComposer`).
 - `src/solarSystem.js` – datengetriebener Aufbau: Körper, Materialien/Texturen, Achsneigung, Saturnring, Erd-Wolken, Atmosphären-Glow, Sonnen-Korona, Orbits.
 - `src/textures.js` – **browser-only** Texturlader; liefert ein Asset-Bündel an `solarSystem.js`.
+- `src/ephemeris.js` – Keplersche Bahnelemente (JPL/Standish); berechnet die heliozentrische Länge je Planet für ein Datum (reine Mathematik, Node-tauglich). `solarSystem.setDate(date)` setzt damit die Konstellation.
 - `src/scaling.js` – vier Maßstabsmodi, Radien/Distanzen, Vergleichslayout, Kameravorgaben.
 - `src/data.js` – Laden + Validierung von `public/data/solar-system.json`.
 - `src/ui.js`, `src/cameraFocus.js` – Infopanel/Buttons bzw. sanfte Kamerafahrt.

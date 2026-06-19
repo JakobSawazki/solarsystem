@@ -4,8 +4,8 @@ import {
   getOrbitDistance,
   getSceneRadius
 } from './scaling.js'
+import { heliocentricLongitude } from './ephemeris.js'
 
-const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5))
 const ORBIT_POINT_COUNT = 256
 
 // Atmosphären-Glow nur für Körper mit nennenswerter Lufthülle.
@@ -200,7 +200,7 @@ function disposeObject(object) {
   })
 }
 
-export function createSolarSystem({ scene, sunLight, data, mode = 'cinematic', assets = null }) {
+export function createSolarSystem({ scene, sunLight, data, mode = 'cinematic', assets = null, date = new Date() }) {
   const root = new THREE.Group()
   root.name = 'solar-system'
   scene.add(root)
@@ -208,6 +208,7 @@ export function createSolarSystem({ scene, sunLight, data, mode = 'cinematic', a
   const bodies = new Map()
   const selectable = []
   let activeMode = mode
+  let currentDate = date instanceof Date ? date : new Date(date)
 
   function clear() {
     const children = [...root.children]
@@ -287,11 +288,21 @@ export function createSolarSystem({ scene, sunLight, data, mode = 'cinematic', a
       index,
       sceneRadius,
       orbit: null,
-      orbitDistance: 0,
-      phase: index * GOLDEN_ANGLE + 0.35
+      orbitDistance: 0
     }
     bodies.set(body.id, entry)
     return entry
+  }
+
+  // Setzt einen Planeten auf seinen realen heliozentrischen Bahnwinkel für das
+  // aktuelle Datum; der Radius bleibt der maßstabskomprimierte Bahnradius.
+  function positionPlanet(entry) {
+    const longitude = heliocentricLongitude(entry.body.id, currentDate)
+    entry.group.position.set(
+      Math.cos(longitude) * entry.orbitDistance,
+      0,
+      Math.sin(longitude) * entry.orbitDistance
+    )
   }
 
   function rebuild(nextMode = activeMode) {
@@ -317,45 +328,39 @@ export function createSolarSystem({ scene, sunLight, data, mode = 'cinematic', a
 
     sunLight.position.copy(sunEntry.group.position)
     planetEntries.forEach((entry) => {
-      const distance = getOrbitDistance(
+      entry.orbitDistance = getOrbitDistance(
         entry.body,
         entry.index,
         activeMode,
         { sunRadius: sunEntry.sceneRadius }
       )
-      entry.orbitDistance = distance
-
-      entry.group.position.set(
-        Math.cos(entry.phase) * distance,
-        0,
-        Math.sin(entry.phase) * distance
-      )
-      entry.orbit = createOrbit(distance, entry.body.id)
+      positionPlanet(entry)
+      entry.orbit = createOrbit(entry.orbitDistance, entry.body.id)
       root.add(entry.orbit)
     })
   }
 
-  function update(elapsedSeconds) {
-    const sunEntry = bodies.get('sun')
-    if (sunEntry) sunEntry.mesh.rotation.y = elapsedSeconds * 0.02
-
+  // Stellt die Konstellation für ein Datum ein (heliozentrische Längen).
+  function setDate(nextDate) {
+    currentDate = nextDate instanceof Date ? nextDate : new Date(nextDate)
     if (activeMode === 'compare') return
-
     data.planets.forEach((planet) => {
       const entry = bodies.get(planet.id)
-      if (!entry) return
+      if (entry) positionPlanet(entry)
+    })
+  }
 
-      const period = planet.orbital_period_days || 365
-      const orbitAngle = entry.phase + (elapsedSeconds * 0.18 / period) * Math.PI * 2 * 365
-      entry.group.position.set(
-        Math.cos(orbitAngle) * entry.orbitDistance,
-        0,
-        Math.sin(orbitAngle) * entry.orbitDistance
-      )
-
-      const rotationDirection = Math.sign(planet.rotation_period_hours || 1)
-      entry.mesh.rotation.y = elapsedSeconds * 0.08 * rotationDirection
-      if (entry.clouds) entry.clouds.rotation.y = elapsedSeconds * 0.1
+  // Nur kosmetische Eigenrotation auf Basis der realen Laufzeit – unabhängig
+  // vom Simulationsdatum, damit die Planeten auch im Pausenzustand „leben".
+  function update(elapsedSeconds) {
+    bodies.forEach((entry) => {
+      if (entry.body.id === 'sun') {
+        entry.mesh.rotation.y = elapsedSeconds * 0.05
+        return
+      }
+      const direction = Math.sign(entry.body.rotation_period_hours || 1)
+      entry.mesh.rotation.y = elapsedSeconds * 0.22 * direction
+      if (entry.clouds) entry.clouds.rotation.y = elapsedSeconds * 0.27
     })
   }
 
@@ -371,8 +376,12 @@ export function createSolarSystem({ scene, sunLight, data, mode = 'cinematic', a
     bodies,
     selectable,
     rebuild,
+    setDate,
     update,
     dispose,
+    get date() {
+      return currentDate
+    },
     get mode() {
       return activeMode
     }

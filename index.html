@@ -45,12 +45,22 @@
             </select>
           </label>
           <div class="time-field">
-            <span class="time-label">Zeit</span>
-            <div id="timeControl" class="time-control" role="group" aria-label="Zeitgeschwindigkeit">
-              <button type="button" data-speed="0" aria-pressed="false" title="Pause">⏸</button>
-              <button type="button" data-speed="1" aria-pressed="true">1×</button>
-              <button type="button" data-speed="10" aria-pressed="false">10×</button>
-              <button type="button" data-speed="100" aria-pressed="false">100×</button>
+            <span class="time-label">Datum &amp; Tempo</span>
+            <div class="time-row">
+              <input
+                type="date"
+                id="dateInput"
+                min="1800-01-01"
+                max="2100-12-31"
+                aria-label="Datum der Planetenkonstellation"
+              />
+              <button id="todayButton" type="button" class="today-button">Heute</button>
+              <div id="timeControl" class="time-control" role="group" aria-label="Zeitgeschwindigkeit">
+                <button type="button" data-speed="0" aria-pressed="true" title="Pause">⏸</button>
+                <button type="button" data-speed="1" aria-pressed="false" title="1 Tag pro Sekunde">1 T/s</button>
+                <button type="button" data-speed="7" aria-pressed="false" title="7 Tage pro Sekunde">7 T/s</button>
+                <button type="button" data-speed="30" aria-pressed="false" title="30 Tage pro Sekunde">30 T/s</button>
+              </div>
             </div>
           </div>
           <button id="resetView" type="button">Ansicht zurücksetzen</button>
@@ -102,6 +112,16 @@
         </section>
       </main>
     </div>
+    <a
+      class="site-credit"
+      href="https://jakobsawazki.github.io/sawazki-electronics/"
+      target="_blank"
+      rel="noopener"
+      aria-label="Designed by Sawazki Electronics – zur Website"
+    >
+      <span class="credit-text">Designed by <strong>Sawazki Electronics</strong></span>
+      <span class="credit-copy">© 2026</span>
+    </a>
     <script>
       if (window.location.protocol === 'file:') {
         document.documentElement.classList.add('file-mode')

@@ -1,5 +1,21 @@
 # CHANGELOG.md
 
+## 0.8.0 – 2026-06-19
+
+### Hinzugefügt
+
+- Echte Planetenkonstellation: Die Planeten stehen auf ihren Bahnen am realen heliozentrischen Winkel für ein wählbares Datum (neues Modul `src/ephemeris.js` mit Keplerschen Bahnelementen, JPL/Standish, gültig ca. 1800–2050).
+- Datumsfeld in der Toolbar plus „Heute"-Button, um die Stellung der Planeten zu einem beliebigen Datum anzuzeigen (Standard: heute).
+- Neuer Ephemeriden-Test `scripts/validate-ephemeris.mjs` (u. a. realistische Erdposition am Referenzdatum, Periodik, Determinismus).
+- Footer-Credit „Designed by Sawazki Electronics © 2026", verlinkt auf die Firmenseite (mit responsivem Verhalten auf Mobilgeräten).
+
+### Verbessert
+
+- Zeitsteuerung von abstrakten Faktoren auf **Tage pro Sekunde** umgestellt (Pause/1/7/30 T/s) und insgesamt ruhiger; Start jetzt pausiert auf der heutigen Konstellation.
+- Eigenrotation der Planeten ist nun rein kosmetisch an die reale Laufzeit gekoppelt und damit unabhängig vom Simulationsdatum (lebendig auch im Pausenzustand, respektiert weiterhin `prefers-reduced-motion`).
+- Maßstabswechsel und Datumssprünge erhalten die eingestellte Konstellation.
+- `TASK-015` (echte Konstellation + Datumseingabe) abgeschlossen; alle fünf Tests und der Produktions-Build erfolgreich, App im Browser fehlerfrei geladen.
+
 ## 0.7.0 – 2026-06-19
 
 ### Hinzugefügt
