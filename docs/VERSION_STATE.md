@@ -45,12 +45,12 @@ Codex soll als Nächstes `TASK-007` bearbeiten:
 - Beim direkten Öffnen von `index.html` erklärt eine gestaltete Hinweisseite den erforderlichen Vite-Start statt eine scheinbar defekte Rohansicht zu zeigen.
 - `npm run test` umfasst zusätzlich Auswahlmodelle, Infodaten aller neun Himmelskörper und die Kamerainterpolation.
 - `vite.config.js` setzt lokal `/` und in GitHub Actions dynamisch `/<Repositoryname>/` als Basis.
-- Der vorhandene GitHub-Pages-Workflow baut und veröffentlicht das `dist`-Verzeichnis, sobald das Projekt zu GitHub übertragen wird.
+- Das öffentliche Repository liegt unter `https://github.com/JakobSawazki/solarsystem`.
+- Der GitHub-Pages-Workflow baut und veröffentlicht `main` erfolgreich unter `https://jakobsawazki.github.io/solarsystem/`.
 
 ## Offene Risiken
 
 - Das JavaScript-Hauptbundle überschreitet derzeit Vites Warnschwelle von 500 kB; Performance-Optimierung bleibt eine spätere Aufgabe.
-- Der Projektordner ist noch kein Git-Repository und deshalb noch nicht mit GitHub oder GitHub Pages verbunden.
 - Planetendaten sind für MVP ausreichend, sollten bei späterer wissenschaftlicher Vertiefung nochmals gegen Primärquellen geprüft werden.
 - Vollständig maßstabsgetreue Größen + Entfernungen gleichzeitig sind didaktisch nur über spezielle Modi sinnvoll.
 - Die interaktive 3D-App benötigt wegen ES-Modulen und Daten-Fetch einen HTTP-Server; der direkte `file://`-Aufruf zeigt deshalb bewusst nur eine Startanleitung.

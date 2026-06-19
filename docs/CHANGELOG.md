@@ -12,6 +12,8 @@
 
 ### Verbessert
 
+- Öffentliches GitHub-Repository und automatische GitHub-Pages-Veröffentlichung eingerichtet.
+- README und Versionsstand mit Repository- und Live-Demo-Links aktualisiert.
 - Himmelskörper-Navigation bleibt auch bei geschlossenem Infopanel sichtbar und markiert die aktive Auswahl.
 - Raycasting unterscheidet kurze Klicks von Drehgesten, damit beim Navigieren keine versehentlichen Auswahlen entstehen.
 - Infopanel zeigt nun auch die Besonderheiten aus `facts_de` der zentralen JSON-Datei.

@@ -1,6 +1,8 @@
 # Simuliertes Sonnensystem – interaktive GitHub-Pages-Homepage
 
-Dieses Repository ist als Codex-Startpaket für eine hochwertige, interaktive Web-App gedacht: eine 3D-Homepage über unser Sonnensystem mit Sonne, Planeten, maßstabsbezogenen Ansichten, Infokarten, Animationen, Zoom/Drehung und GitHub-Pages-Veröffentlichung.
+Dieses Repository enthält eine interaktive 3D-Homepage über unser Sonnensystem mit Sonne, acht Planeten, vier transparent erklärten Maßstabsmodi, Infopanel sowie Zoom-, Dreh- und Fokussteuerung.
+
+**Live-Demo:** https://jakobsawazki.github.io/solarsystem/
 
 ## Zielbild
 
@@ -48,11 +50,9 @@ npm run preview
 
 ## GitHub Pages
 
-Das Repository enthält bereits einen Workflow unter `.github/workflows/deploy.yml`. In GitHub muss unter:
+Die Seite wird bei jedem Push auf `main` automatisch durch `.github/workflows/deploy.yml` gebaut und veröffentlicht:
 
-`Settings` → `Pages` → `Build and deployment` → `Source` → `GitHub Actions`
-
-ausgewählt werden.
+https://jakobsawazki.github.io/solarsystem/
 
 ## Einstieg für Codex
 
