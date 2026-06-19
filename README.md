@@ -16,8 +16,11 @@ Die fertige Anwendung soll wie eine moderne wissenschaftlich-edukative Web-Erfah
   - **Größenmaßstab**: Radien relativ korrekt, Entfernungen bewusst komprimiert.
   - **Entfernungsmaßstab**: Umlaufbahnen relativ korrekt, Planetengrößen sichtbar über Mindestgröße/Marker.
   - **Vergleichsmodus**: Größenvergleich nebeneinander oder als „Line-up“.
-- Coole, aber performante Effekte: Sternfeld, dezentes Sonnen-Glow, Orbitlinien, Labels, sanfte Kameraübergänge.
+- Coole, aber performante Effekte: echte Planetentexturen, Bloom, Atmosphären-Glow, Sternfeld, Orbitlinien, sanfte Kameraübergänge.
+- Zeitsteuerung (Pause, 1×, 10×, 100×) für die Umlaufbewegung.
 - Veröffentlichung über GitHub Pages.
+
+Texturen werden mit dokumentierter Lizenz eingebunden, siehe `public/textures/TEXTURE_CREDITS.md`.
 
 ## Warum mehrere Maßstäbe nötig sind
 

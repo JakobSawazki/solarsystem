@@ -2,15 +2,13 @@
 
 ## Aktueller Stand
 
-**Version:** 0.6.0  
+**Version:** 0.7.0  
 **Datum:** 2026-06-19  
-**Status:** `TASK-006` abgeschlossen; alle Himmelskörper sind direkt oder in der 3D-Szene auswählbar, das Datenpanel ist schließbar und die Kamera fokussiert sanft.
+**Status:** `TASK-007`, `TASK-008` und `TASK-014` abgeschlossen; echte Planetentexturen, Bloom-/Atmosphären-Effekte, ACES-Tone-Mapping, Achsneigung, Zeitsteuerung und SEO-/Sharing-Tags sind umgesetzt. Alle vier Tests und der Produktions-Build laufen erfolgreich.
 
 ## Nächster Schritt
 
-Codex soll als Nächstes `TASK-007` bearbeiten:
-
-> Animation: Umlauf, Rotation und Zeitsteuerung.
+Als Nächstes bietet sich `TASK-009` (Mobile/Barrierefreiheit feinjustieren) oder `TASK-010` (GitHub-Pages-Deployment final abnehmen) an. Die Zeitsteuerung respektiert bereits `prefers-reduced-motion`; der Deploy-Workflow nutzt bereits `npm ci`.
 
 ## Technischer Zustand
 
@@ -26,6 +24,12 @@ Codex soll als Nächstes `TASK-007` bearbeiten:
 - Sonne, exakt acht Planeten sowie numerische Radius-, Durchmesser- und Entfernungswerte werden geprüft.
 - Daten- und Ladefehler erscheinen sicher als deutscher Hinweis im Infopanel.
 - `src/solarSystem.js` kapselt datengetrieben Himmelskörper, Orbitlinien, Materialien und Saturnringe.
+- `src/textures.js` lädt echte Planetentexturen ausschließlich im Browser und übergibt sie als Asset-Bündel; ohne DOM (Node-Tests) bleibt die Szene rein farbbasiert.
+- `src/scene.js` setzt ACES-Filmic-Tone-Mapping und ein Bloom-Postprocessing (`EffectComposer`) mit sicherem Fallback auf den einfachen Renderpfad.
+- Erde und Venus erhalten einen Fresnel-Atmosphären-Glow, die Sonne eine additive Korona; Planeten besitzen ihre reale Achsneigung.
+- Eine Zeitsteuerung (Pause/1×/10×/100×) speist eine akkumulierte Simulationszeit und respektiert `prefers-reduced-motion`.
+- Abhängigkeiten sind exakt gepinnt (three 0.184.0, vite 8.0.16); der Deploy-Workflow installiert mit `npm ci`.
+- Offene-Graph-/Twitter-Tags, ein SVG-Favicon und ein gerendertes `og-image.jpg` verbessern die Linkvorschau.
 - Der Cinematic-Startmodus nutzt sichtbare, komprimierte Abstände ohne übergroße Sonne.
 - Planeten starten verteilt auf ihren Bahnen statt übereinander auf einer Linie.
 - Alle Körperzentren liegen in der geprüften Desktop-Startansicht.

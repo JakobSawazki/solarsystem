@@ -10,9 +10,9 @@
     "test": "node scripts/validate-data.mjs && node scripts/validate-scaling.mjs && node scripts/validate-rendering.mjs && node scripts/validate-interaction.mjs"
   },
   "dependencies": {
-    "three": "latest"
+    "three": "0.184.0"
   },
   "devDependencies": {
-    "vite": "latest"
+    "vite": "8.0.16"
   }
 }

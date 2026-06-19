@@ -3,8 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Interaktive 3D-Homepage über unser simuliertes Sonnensystem mit Größen- und Entfernungsvergleich." />
+    <meta name="description" content="Interaktive 3D-Homepage über unser simuliertes Sonnensystem mit echten Planetentexturen, Größen- und Entfernungsvergleich." />
+    <meta name="theme-color" content="#05060f" />
     <title>Simuliertes Sonnensystem</title>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Simuliertes Sonnensystem" />
+    <meta property="og:title" content="Simuliertes Sonnensystem – interaktive 3D-Ansicht" />
+    <meta property="og:description" content="Drehen, zoomen und vergleichen: eine interaktive 3D-Reise durch unser Sonnensystem mit echten Planetentexturen und mehreren Maßstabsmodi." />
+    <meta property="og:url" content="https://jakobsawazki.github.io/solarsystem/" />
+    <meta property="og:image" content="https://jakobsawazki.github.io/solarsystem/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Simuliertes Sonnensystem – interaktive 3D-Ansicht" />
+    <meta name="twitter:description" content="Interaktive 3D-Reise durch unser Sonnensystem mit echten Planetentexturen und mehreren Maßstabsmodi." />
+    <meta name="twitter:image" content="https://jakobsawazki.github.io/solarsystem/og-image.jpg" />
+
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
@@ -26,6 +44,15 @@
               <option value="compare">Vergleich</option>
             </select>
           </label>
+          <div class="time-field">
+            <span class="time-label">Zeit</span>
+            <div id="timeControl" class="time-control" role="group" aria-label="Zeitgeschwindigkeit">
+              <button type="button" data-speed="0" aria-pressed="false" title="Pause">⏸</button>
+              <button type="button" data-speed="1" aria-pressed="true">1×</button>
+              <button type="button" data-speed="10" aria-pressed="false">10×</button>
+              <button type="button" data-speed="100" aria-pressed="false">100×</button>
+            </div>
+          </div>
           <button id="resetView" type="button">Ansicht zurücksetzen</button>
         </div>
       </header>

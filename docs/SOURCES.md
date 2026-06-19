@@ -26,6 +26,23 @@ Stand: 2026-06-18
   https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site  
   Verwendung: GitHub-Pages-Veröffentlichung per Branch oder GitHub Actions.
 
+## Planetentexturen
+
+Seit Version 0.7.0 nutzt die App echte equirektangulare Texturen. Quelle, Lizenz
+und Autor sind je Datei in `public/textures/TEXTURE_CREDITS.md` dokumentiert.
+
+- Solar System Scope – CC BY 4.0
+  https://www.solarsystemscope.com/textures/
+  Verwendung: Sonne, Jupiter, Saturn (inkl. Ring), Uranus, Neptun.
+
+- Planet Pixel Emporium (James Hastings-Trew) – frei mit Namensnennung
+  https://planetpixelemporium.com/planets.html
+  Verwendung: Merkur, Venus, Erde (inkl. Wolken/Glanz/Bump), Mars.
+
+- Bezug/Mirror der Dateien: https://github.com/KyleGough/solar-system
+
 ## Lizenz-/Attributionshinweis
 
-Für das MVP werden zunächst farbige/prozedurale Materialien statt echter Planetentexturen empfohlen. Wenn später Bildtexturen eingebunden werden, müssen Quelle, Lizenz, Autor und Nutzungsbedingungen pro Asset dokumentiert werden.
+Werden Texturen ersetzt oder ergänzt, müssen Quelle, Lizenz, Autor und
+Nutzungsbedingungen pro Asset in `public/textures/TEXTURE_CREDITS.md` nachgetragen
+werden.

@@ -85,6 +85,41 @@ h1 {
   color: #b6c6d8;
 }
 
+.time-field {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.time-label {
+  font-size: 0.8rem;
+  color: #b6c6d8;
+}
+
+.time-control {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.82);
+}
+
+.time-control button {
+  min-width: 2.6rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+.time-control button[aria-pressed="true"] {
+  border-color: rgba(125, 211, 252, 0.55);
+  background: rgba(56, 189, 248, 0.18);
+  color: #e8f6ff;
+}
+
 select,
 button {
   border: 1px solid rgba(125, 211, 252, 0.35);

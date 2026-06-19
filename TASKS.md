@@ -153,7 +153,8 @@ Arbeitsregel für Codex: Immer nur die erste Task mit Status `OPEN` bearbeiten. 
 
 ### TASK-007 – Animation: Umlauf, Rotation und Zeitsteuerung
 
-**Status:** OPEN  
+**Status:** DONE  
+**Abgeschlossen:** 2026-06-19 – Zeitsteuerung (Pause/1×/10×/100×) über akkumulierte Simulationszeit, Eigenrotation mit Achsneigung, `prefers-reduced-motion`-Beachtung und Orbit-Caching ohne Neuberechnung pro Frame.  
 **Priorität:** Mittel/Hoch
 
 **Ziel:** Das Sonnensystem wirkt lebendig und steuerbar.
@@ -175,7 +176,8 @@ Arbeitsregel für Codex: Immer nur die erste Task mit Status `OPEN` bearbeiten. 
 
 ### TASK-008 – Visuelle Effekte und Designpolitur
 
-**Status:** OPEN  
+**Status:** DONE  
+**Abgeschlossen:** 2026-06-19 – Verbessertes Sternfeld, ACES-Tone-Mapping, Bloom-Postprocessing, Sonnen-Korona, Fresnel-Atmosphären (Erde/Venus) und realistische Tag/Nacht-Beleuchtung; Performance über Pixelratio-Begrenzung und Renderpfad-Fallback abgesichert.  
 **Priorität:** Mittel
 
 **Ziel:** Die App erhält einen hochwertigen, modernen Look.
@@ -272,7 +274,8 @@ Arbeitsregel für Codex: Immer nur die erste Task mit Status `OPEN` bearbeiten. 
 
 ### TASK-014 – Texturen mit sauberer Quellenangabe
 
-**Status:** OPEN  
+**Status:** DONE  
+**Abgeschlossen:** 2026-06-19 – Echte equirektangulare Texturen für Sonne und alle acht Planeten (inkl. Erd-Wolken/-Glanz/-Bump und Saturnring). Quelle, Lizenz und Autor je Datei in `public/textures/TEXTURE_CREDITS.md` dokumentiert (Solar System Scope CC BY 4.0; Gesteinsplaneten Planet Pixel Emporium mit Namensnennung).  
 **Priorität:** Niedrig/Mittel
 
 **Idee:** Optionale echte Planetentexturen einbinden, aber nur mit sauber dokumentierten Lizenzen/Quellen.

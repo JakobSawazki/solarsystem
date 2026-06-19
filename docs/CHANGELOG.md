@@ -1,5 +1,27 @@
 # CHANGELOG.md
 
+## 0.7.0 – 2026-06-19
+
+### Hinzugefügt
+
+- Echte equirektangulare Planetentexturen für Sonne und alle acht Planeten inklusive Erd-Wolkenschicht, Erd-Glanzkarte (Ozean-Spiegelung) sowie Höhenkarten (Bump) für die Gesteinsplaneten.
+- Neues, browser-only Texturmodul `src/textures.js`, das ein Asset-Bündel an die Szene übergibt, sodass die Node-Tests ohne DOM unverändert laufen.
+- Bloom-Postprocessing über `EffectComposer` (`RenderPass`/`UnrealBloomPass`/`OutputPass`) plus ACES-Filmic-Tone-Mapping für einen cineastischen Look.
+- Atmosphären-Glow (Fresnel-Shader) für Erde und Venus sowie eine additive Sonnen-Korona.
+- Eigenrotationsachsen mit realer Achsneigung (z. B. „liegender" Uranus); Saturnring nutzt eine Ringtextur mit radial korrekter UV-Abbildung.
+- Zeitsteuerung in der Toolbar (Pause, 1×, 10×, 100×) mit Simulationszeit-Akkumulator und Beachtung von `prefers-reduced-motion`.
+- Verbesserter Sternenhimmel mit weichen, runden Sternen in zwei Helligkeits-/Farbebenen.
+- SEO/Sharing: Open-Graph- und Twitter-Card-Tags, `theme-color`, ein SVG-Favicon sowie ein gerendertes Vorschaubild `og-image.jpg`.
+- `public/textures/TEXTURE_CREDITS.md` mit Quelle, Lizenz und Autor je Textur.
+- `CLAUDE.md` als Projektanker (Kontext, Start-/Test-Befehle, Test-Invarianten).
+
+### Verbessert
+
+- Beleuchtung mit niedrigerem Grundlicht und Sonnenlicht ohne Abstandsabfall, sodass eine klare Tag/Nacht-Grenze auf allen Planeten sichtbar ist.
+- Orbit-Distanz wird beim Aufbau einmal zwischengespeichert statt pro Frame neu berechnet.
+- Abhängigkeiten exakt gepinnt (`three` 0.184.0, `vite` 8.0.16); der Deploy-Workflow nutzt nun das reproduzierbare `npm ci` mit npm-Cache.
+- `TASK-007`, `TASK-008` und `TASK-014` abgeschlossen; alle vier Validierungstests und der Produktions-Build erfolgreich ausgeführt, App im Browser mit allen Texturen fehlerfrei geladen.
+
 ## 0.6.0 – 2026-06-19
 
 ### Hinzugefügt

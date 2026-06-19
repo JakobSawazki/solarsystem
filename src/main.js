@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { loadSolarSystemData } from './data.js'
+import { loadSolarSystemTextures } from './textures.js'
 import { getFocusDistance } from './cameraFocus.js'
 import { getScaleMode, SCALE_MODE_IDS } from './scaling.js'
 import { createSceneRuntime } from './scene.js'
@@ -9,6 +10,7 @@ import { createSolarSystemUi } from './ui.js'
 const container = document.querySelector('#sceneContainer')
 const scaleModeSelect = document.querySelector('#scaleMode')
 const resetViewButton = document.querySelector('#resetView')
+const timeControl = document.querySelector('#timeControl')
 
 const sceneRuntime = createSceneRuntime(container)
 const scene = sceneRuntime?.scene
@@ -19,10 +21,14 @@ const sunLight = sceneRuntime?.sunLight
 
 const raycaster = new THREE.Raycaster()
 const pointer = new THREE.Vector2()
-let solarData = null
+const reducedMotion = typeof window.matchMedia === 'function'
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 let solarSystem = null
 let scaleMode = 'cinematic'
-let animationStart = performance.now()
+let simTime = 0
+let lastFrame = performance.now()
+let timeSpeed = reducedMotion ? 0 : 1
 let pointerStart = null
 
 const ui = createSolarSystemUi({
@@ -62,23 +68,80 @@ function applyScaleMode(modeId, { rebuild = true } = {}) {
   ui.clearSelection()
 }
 
-function createStarField() {
+function setTimeSpeed(speed) {
+  timeSpeed = speed
+  if (!timeControl) return
+  timeControl.querySelectorAll('button').forEach((button) => {
+    button.setAttribute('aria-pressed', String(Number(button.dataset.speed) === speed))
+  })
+}
+
+function configureTimeControl() {
+  if (!timeControl) return
+  timeControl.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-speed]')
+    if (!button) return
+    setTimeSpeed(Number(button.dataset.speed))
+  })
+  setTimeSpeed(timeSpeed)
+}
+
+function createStarTexture() {
+  const size = 64
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+  const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2)
+  gradient.addColorStop(0, 'rgba(255,255,255,1)')
+  gradient.addColorStop(0.35, 'rgba(255,255,255,0.65)')
+  gradient.addColorStop(1, 'rgba(255,255,255,0)')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, size, size)
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+  return texture
+}
+
+function createStarLayer(count, radiusMin, radiusMax, size, opacity, tint, texture) {
   const geometry = new THREE.BufferGeometry()
-  const count = 1200
   const positions = new Float32Array(count * 3)
+  const colors = new Float32Array(count * 3)
+  const base = new THREE.Color(tint)
 
   for (let i = 0; i < count; i += 1) {
-    const radius = 2500 + Math.random() * 2500
+    const radius = radiusMin + Math.random() * (radiusMax - radiusMin)
     const theta = Math.random() * Math.PI * 2
     const phi = Math.acos(2 * Math.random() - 1)
     positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta)
     positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
     positions[i * 3 + 2] = radius * Math.cos(phi)
+
+    const shade = 0.55 + Math.random() * 0.45
+    colors[i * 3] = base.r * shade
+    colors[i * 3 + 1] = base.g * shade
+    colors[i * 3 + 2] = base.b * shade
   }
 
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-  const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2, sizeAttenuation: true })
-  scene.add(new THREE.Points(geometry, material))
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+  const material = new THREE.PointsMaterial({
+    size,
+    map: texture,
+    vertexColors: true,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true
+  })
+  return new THREE.Points(geometry, material)
+}
+
+function createStarField() {
+  const texture = createStarTexture()
+  scene.add(createStarLayer(1600, 2400, 4200, 7, 0.85, '#cfe2ff', texture))
+  scene.add(createStarLayer(280, 2200, 3800, 16, 0.95, '#fff4e0', texture))
 }
 
 function selectBody(bodyId, { moveCamera = true } = {}) {
@@ -119,23 +182,33 @@ function onPointerUp(event) {
 }
 
 function animate(now) {
-  const elapsedSeconds = (now - animationStart) / 1000
-  solarSystem?.update(elapsedSeconds)
+  const delta = Math.min((now - lastFrame) / 1000, 0.1)
+  lastFrame = now
+  simTime += delta * timeSpeed
+
+  solarSystem?.update(simTime)
   sceneRuntime.updateCameraTransition(now)
   controls.update()
-  renderer.render(scene, camera)
+  sceneRuntime.render()
   requestAnimationFrame(animate)
 }
 
 async function init() {
   configureScaleModeSelect()
+  configureTimeControl()
   createStarField()
-  solarData = await loadSolarSystemData()
+
+  const [solarData, assets] = await Promise.all([
+    loadSolarSystemData(),
+    loadSolarSystemTextures()
+  ])
+
   solarSystem = createSolarSystem({
     scene,
     sunLight,
     data: solarData,
-    mode: scaleMode
+    mode: scaleMode,
+    assets
   })
 
   ui.setBodies([solarData.sun, ...solarData.planets])
@@ -156,6 +229,8 @@ async function init() {
     if (event.key === 'Escape') ui.closePanel()
     if (event.key.toLowerCase() === 'r') resetViewButton.click()
   })
+
+  lastFrame = performance.now()
   requestAnimationFrame(animate)
 }
 
